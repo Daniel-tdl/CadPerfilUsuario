@@ -66,6 +66,10 @@ module.exports = app => {
                 .where({ id: req.params.id })
                 .del()
 
+            const rowsDeleted = await app.db('usuarios')
+                .where({ id: req.params.id }).del()
+                ExisteOuErro(rowsDeleted, 'Usuário não foi encontrado.')
+
             res.status(204).send()
         } catch(msg) {
             res.status(400).send(msg)
