@@ -1,4 +1,4 @@
-const { autthSecret } = require('../.env')
+const { authSecret } = require('../.env')
 const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt-nodejs')
 
@@ -16,18 +16,20 @@ module.exports = app => {
 
         const ehSenhaIguais = bcrypt.compareSync(req.body.senha, usuario.senha)
         if (!ehSenhaIguais) return res.status(401).send('Usuário/senha inválidos!')
+        
+        const now = Math.floor(Date.now() / 1000)
 
-        const now = Math.floor(Date.now() / 1000 )
-        const payLoad = {
+        const payload = {
+            id: usuario.id,
             nome: usuario.nome,
             usuario: usuario.usuario,
             iat: now,
             exp: now + (60 * 60 * 24 * 3)
-        }
+        }       
 
         res.json({
-            ...payLoad, 
-            token: jwt.encode(payLoad, autthSecret)
+            ...payload,
+            token: jwt.encode(payload, authSecret)
         })
     }
 

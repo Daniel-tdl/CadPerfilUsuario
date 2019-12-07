@@ -47,7 +47,6 @@ module.exports = app => {
     const get = (req, res) => {
         app.db('usuarios')
         .select('id', 'nome', 'usuario')
-        .whereNull('deletedAt')
         .then(users => res.json(users))
         .catch(err => res.status(500).send(err))
     }
