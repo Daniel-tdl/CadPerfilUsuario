@@ -62,10 +62,6 @@ module.exports = app => {
 
     const excluir = async (req, res) => {
         try {
-            app.db('usuarios')
-                .where({ id: req.params.id })
-                .del()
-
             const rowsDeleted = await app.db('usuarios')
                 .where({ id: req.params.id }).del()
                 ExisteOuErro(rowsDeleted, 'Usuário não foi encontrado.')
