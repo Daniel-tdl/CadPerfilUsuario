@@ -1,6 +1,6 @@
 module.exports = app => {
-    app.post('/signin', app.api.login.signin)
-    app.post('/signup', app.api.usuario.save)
+    app.post('/login', app.api.login.signin)
+    app.post('/registrar', app.api.usuario.save)
     app.post('/validarToken', app.api.login.validarToken)
 
     app.route('/usuarios')
